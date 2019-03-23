@@ -1,9 +1,11 @@
 const express = require('express')
+const cors = require('cors')
 const cardsRouter = require('./router/cards.js')
 
 const app = express()
 
 app.use(express.static('public'))
+app.use(cors())
 app.use('/cards', cardsRouter)
 
 const port = 3000

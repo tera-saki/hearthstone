@@ -7,7 +7,7 @@ const cardsRouter = express.Router()
 
 cardsRouter.get('/', async (req, res, next) => {
   const { query } = req
-  const cards = await Card.findAll({ attributes: ['name'], ...procConditions(query), ...procPaging(query) })
+  const cards = await Card.findAll({ ...procConditions(query), ...procPaging(query) })
   res.send(cards)
 })
 
