@@ -9,7 +9,12 @@ const Card = sequelize.define('card', {
   armor: Sequelize.TINYINT.UNSIGNED,
   artist: Sequelize.STRING,
   attack: Sequelize.TINYINT.UNSIGNED,
-  cardClass: Sequelize.ENUM('DRUID', 'HUNTER', 'MAGE', 'PALADIN', 'PRIEST', 'ROGUE', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'NEUTRAL'),
+  cardClass: {
+    type: Sequelize.ENUM('druid', 'hunter', 'mage', 'paladin', 'priest', 'rogue', 'shaman', 'warlock', 'warrior', 'neutral'),
+    set(val) {
+      this.setDataValue('cardClass', val.toLowerCase())
+    },
+  },
   cost: Sequelize.TINYINT.UNSIGNED,
   dbfId: {
     type: Sequelize.INTEGER,
