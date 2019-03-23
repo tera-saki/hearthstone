@@ -49,10 +49,10 @@ const rarities = [
 ]
 
 const hsSeasons = [
-  { name: 'Kraken', start: new Date(2016, 4, 1) },
-  { name: 'Mammoth', start: new Date(2017, 4, 1) },
-  { name: 'Raven', start: new Date(2018, 4, 1) },
-  { name: 'Dragon', start: new Date(2019, 4, 1) },
+  { name: 'Kraken', start: new Date('2016-04-01') },
+  { name: 'Mammoth', start: new Date('2017-04-01')  },
+  { name: 'Raven', start: new Date('2018-04-01')  },
+  { name: 'Dragon', start: new Date('2019-04-01')  },
 ]
 
 const standardSets = () => {
