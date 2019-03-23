@@ -11,6 +11,7 @@
           </option>
         </select>
       </div>
+
       <div class="form-group mx-2" id="expansion">
         <label class="mx-1" for="expansion">セット</label>
         <select class="form-control-sm" id="expansion" v-model="expansion">
@@ -25,7 +26,26 @@
   <div class="card-lists">
     <div class="container">
       <div class="row">
-        <div v-for="card in cards" :key="card.id" class="col-xs-3">
+        <ul class="pagination mx-1">
+          <li class="page-item" :class="{ disabled: page === 1 }">
+            <a class="page-link" href="#" @click="movePage(1)">&laquo;</a>
+          </li>
+          <li class="page-item" :class="{ diabled: page === 1 }">
+            <a class="page-link" href="#" @click="movePage(page - 1)">&lt;</a>
+          </li>
+          <li v-for="p in pages" :key="p" :class="['page-item', p === page ? 'active': '']">
+            <a class="page-link" href="#" @click="movePage(p)">{{ p }}</a>
+          </li>
+          <li class="page-item" :class="{ disabled: page === lastPage }">
+            <a class="page-link" href="#" @click="movePage(page + 1)">&gt;</a>
+          </li>
+          <li class="page-item" :class="{ diabled: page === lastPage }">
+            <a class="page-link" href="#" @click="movePage(lastPage)">&raquo;</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div v-for="card in dataBlock.cards" :key="card.id" class="col-xs-3">
           <img :src="imgURL(card.id)">
         </div>
       </div>
@@ -42,6 +62,8 @@ export default {
   data: () => ({
     cardClass: '',
     expansion: '',
+    page: 1,
+    blockNum: 20,
     klasses,
     expansions,
   }),
@@ -49,10 +71,13 @@ export default {
     imgURL (id) {
       const baseURL = 'https://art.hearthstonejson.com/v1/render/latest/enUS/256x/'
       return baseURL + `${id}.png`
+    },
+    movePage (page) {
+      this.page = page
     }
   },
   asyncComputed: {
-    async cards () {
+    dataBlock () {
       let query = ''
       if (this.cardClass) {
         query += `&cardClass=${this.cardClass}`
@@ -60,8 +85,24 @@ export default {
       if (this.expansion) {
         query += `&expansion=${this.expansion}`
       }
-      const { data } = await getCards(query)
-      return data
+      if (this.page) {
+        query += `&page=${this.page}`
+      }
+      if (this.blockNum) {
+        query += `&blockNum=${this.blockNum}`
+      }
+
+      return getCards(query).then(res => res.data)
+    },
+    lastPage () {
+      const { total } = this.dataBlock
+      return Math.ceil(total / this.blockNum)
+    },
+    pages () {
+      let start = this.$_.max([this.page - 2, 1])
+      let end = this.$_.min([start + 5, this.lastPage + 1])
+      start = this.$_.max([end - 5, 1])
+      return this.$_.range(start, end)
     }
   }
 }

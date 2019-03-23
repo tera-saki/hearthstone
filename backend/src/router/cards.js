@@ -7,8 +7,11 @@ const cardsRouter = express.Router()
 
 cardsRouter.get('/', async (req, res, next) => {
   const { query } = req
-  const cards = await Card.findAll({ ...procConditions(query), ...procPaging(query) })
-  res.send(cards)
+  const { rows: cards, count: total } = await Card.findAndCountAll({
+    ...procConditions(query),
+    ...procPaging(query),
+  })
+  res.send({ cards, total })
 })
 
 function procConditions(query) {
@@ -51,7 +54,7 @@ function procConditions(query) {
 }
 
 function procPaging(query) {
-  const defaultBlockNum = 40
+  const defaultBlockNum = 20
   const maxBlockNum = 100
   const blockNum = Math.min(query.blockNum, maxBlockNum) || defaultBlockNum
   const page = Math.max(query.page, 1) || 1
