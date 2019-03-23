@@ -21,7 +21,29 @@
           </option>
         </select>
       </div>
+
+      <div class="form-group mx-2" id="type">
+        <label class="mx-1" for="type">種類</label>
+        <select class="form-control-sm" id="type" v-model="type">
+          <option v-for="type in [{ value: '', text: '全て' }, ...types]"
+                  :key="type.text" :value="type.value">
+            {{ type.text }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group mx-2" id="rarity">
+        <label class="mx-1" for="rarity">レアリティ</label>
+        <select class="form-control-sm" id="rarity" v-model="rarity">
+          <option v-for="rarity in [{ value: '', text: '全て' }, ...rarities]"
+                  :key="rarity.text" :value="rarity.value">
+            {{ rarity.text }}
+          </option>
+        </select>
+      </div>
+
     </div>
+
   </form>
   <div class="card-lists">
     <div class="container">
@@ -56,16 +78,20 @@
 
 <script>
 import { getCards } from '@/api/api'
-import { klasses, expansions } from '@/util/util'
+import { klasses, expansions, types, rarities } from '@/util/util'
 export default {
   name: 'Cards',
   data: () => ({
     cardClass: '',
     expansion: '',
+    type: '',
+    rarity: '',
     page: 1,
     blockNum: 20,
     klasses,
     expansions,
+    types,
+    rarities,
   }),
   methods: {
     imgURL (id) {
@@ -84,6 +110,12 @@ export default {
       }
       if (this.expansion) {
         query += `&expansion=${this.expansion}`
+      }
+      if (this.type) {
+        query += `&type=${this.type}`
+      }
+      if (this.rarity) {
+        query += `&rarity=${this.rarity}`
       }
       if (this.page) {
         query += `&page=${this.page}`

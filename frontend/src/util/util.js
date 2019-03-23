@@ -28,6 +28,22 @@ const expansions = [
   { value: 'NAXX', text: 'ナクスラーマスの呪い' },
   { value: 'EXPERT1', text: 'クラシック' },
   { value: 'CORE', text: 'ベーシック' },
+  { value: 'HOF', text: '栄誉の殿堂' }
 ]
 
-export { klasses, expansions }
+const types = [
+  { value: 'minion', text: 'ミニオン' },
+  { value: 'spell', text: 'スペル' },
+  { value: 'weapon', text: '武器' },
+  { value: 'hero', text: 'ヒーローカード' }
+]
+
+const rarities = [
+  { value: 'common', text: 'コモン' },
+  { value: 'rare', text: 'レア' },
+  { value: 'epic', text: 'エピック' },
+  { value: 'legendary', text: 'レジェンド' },
+  { value: 'free', text: 'なし' }
+]
+
+export { klasses, expansions, types, rarities }

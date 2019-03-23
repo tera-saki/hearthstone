@@ -50,6 +50,8 @@ function procConditions(query) {
   if (type) {
     where.type = { [Op.or]: type.split(',') }
   }
+  // exclude hero skin
+  where.cost = { ...where.cost, [Op.not]: 0 }
   return { where }
 }
 

@@ -33,10 +33,20 @@ const Card = sequelize.define('card', {
     },
   },
   name: Sequelize.STRING,
-  rarity: Sequelize.ENUM('FREE', 'COMMON', 'RARE', 'EPIC', 'LEGENDARY'),
+  rarity: {
+    type: Sequelize.ENUM('free', 'common', 'rare', 'epic', 'legendary'),
+    set(val) {
+      this.setDataValue('rarity', val.toLowerCase())
+    },
+  },
   expansion: Sequelize.STRING,
   text: Sequelize.STRING(2048),
-  type: Sequelize.STRING,
+  type: {
+    type: Sequelize.STRING,
+    set(val) {
+      this.setDataValue('type', val.toLowerCase())
+    },
+  },
 })
 
 module.exports.Card = Card
