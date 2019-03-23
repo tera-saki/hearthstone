@@ -47,6 +47,12 @@ const Card = sequelize.define('card', {
       this.setDataValue('type', val.toLowerCase())
     },
   },
+  race: {
+    type: Sequelize.STRING,
+    set(val) {
+      this.setDataValue('race', val.toLowerCase())
+    },
+  },
 })
 
 module.exports.Card = Card
