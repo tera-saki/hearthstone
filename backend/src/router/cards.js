@@ -16,7 +16,7 @@ cardsRouter.get('/', async (req, res, next) => {
 
 function procConditions(query) {
   const { artist, attack, cardClass, cost, health, mechanics, name, rarity, expansion, text, type } = query
-  const where = {}
+  let where = {}
   if (artist) {
     where.artist = { [Op.substring]: name }
   }
@@ -50,8 +50,20 @@ function procConditions(query) {
   if (type) {
     where.type = { [Op.or]: type.split(',') }
   }
-  // exclude hero skin
-  where.cost = { ...where.cost, [Op.not]: 0 }
+  const excludeSkin = {
+    [Op.or]: [
+      {
+        cost: {
+          [Op.not]: 0,
+        },
+      }, {
+        type: {
+          [Op.not]: 'hero',
+        },
+      },
+    ],
+  }
+  where = { ...where, ...excludeSkin }
   return { where }
 }
 
