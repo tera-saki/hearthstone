@@ -15,7 +15,11 @@
       <div class="form-group mx-2" id="expansion">
         <label class="mx-1" for="expansion">セット</label>
         <select class="form-control-sm" id="expansion" v-model="expansion">
-          <option v-for="expansion in [{ value: '', text: '全て' }, ...expansions]"
+          <option v-for="expansion in [
+                         { value: '', text: '全て' },
+                         { value: 'standard', text: 'スタンダード' },
+                         ...expansions
+                       ]"
                   :key="expansion.text" :value="expansion.value">
             {{ expansion.text }}
           </option>
@@ -78,7 +82,7 @@
 
 <script>
 import { getCards } from '@/api/api'
-import { klasses, expansions, types, rarities } from '@/util/util'
+import { klasses, expansions, types, rarities, standardSets } from '@/util/util'
 export default {
   name: 'Cards',
   data: () => ({
@@ -109,7 +113,11 @@ export default {
         query += `&cardClass=${this.cardClass}`
       }
       if (this.expansion) {
-        query += `&expansion=${this.expansion}`
+        if (this.expansion === 'standard') {
+          query += `&expansion=${standardSets().join(',')}`
+        } else {
+          query += `&expansion=${this.expansion}`
+        }
       }
       if (this.type) {
         query += `&type=${this.type}`
@@ -123,7 +131,6 @@ export default {
       if (this.blockNum) {
         query += `&blockNum=${this.blockNum}`
       }
-
       return getCards(query).then(res => res.data)
     },
     lastPage () {

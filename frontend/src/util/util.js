@@ -1,3 +1,5 @@
+import { addYears } from 'date-fns'
+
 const klasses = [
   { value: 'druid', text: 'ドルイド' },
   { value: 'hunter', text: 'ハンター' },
@@ -12,15 +14,15 @@ const klasses = [
 ]
 
 const expansions = [
-  { value: 'TROLL', text: '天下一ヴドゥ祭' },
-  { value: 'BOOMSDAY', text: '博士のメカメカ大作戦' },
-  { value: 'GILNEAS', text: '妖の森ウィッチウッド' },
-  { value: 'LOOTAPALOOZA', text: 'コボルトと秘宝の迷宮' },
-  { value: 'ICECROWN', text: '凍てつく玉座の騎士団' },
-  { value: 'UNGORO', text: '大魔境ウンゴロ' },
-  { value: 'GANGS', text: '仁義なきガジェッツァン' },
-  { value: 'KARA', text: 'ワン・ナイト・イン・カラザン' },
-  { value: 'OG', text: '旧神のささやき' },
+  { value: 'TROLL', text: '天下一ヴドゥ祭', yearName: 'Raven'},
+  { value: 'BOOMSDAY', text: '博士のメカメカ大作戦', yearName: 'Raven' },
+  { value: 'GILNEAS', text: '妖の森ウィッチウッド', yearName: 'Raven' },
+  { value: 'LOOTAPALOOZA', text: 'コボルトと秘宝の迷宮', yearName: 'Mammoth' },
+  { value: 'ICECROWN', text: '凍てつく玉座の騎士団', yearName: 'Mammoth' },
+  { value: 'UNGORO', text: '大魔境ウンゴロ', yearName: 'Mammoth' },
+  { value: 'GANGS', text: '仁義なきガジェッツァン', yearName: 'Kraken' },
+  { value: 'KARA', text: 'ワン・ナイト・イン・カラザン', yearName: 'Kraken' },
+  { value: 'OG', text: '旧神のささやき', yearName: 'Kraken' },
   { value: 'LOE', text: 'リーグ・オブ・エクスプローラー' },
   { value: 'TGT', text: 'グランドトーナメント' },
   { value: 'BRM', text: 'ブラックロックマウンテン' },
@@ -46,4 +48,23 @@ const rarities = [
   { value: 'free', text: 'なし' }
 ]
 
-export { klasses, expansions, types, rarities }
+const hsSeasons = [
+  { name: 'Kraken', start: new Date(2016, 4, 1) },
+  { name: 'Mammoth', start: new Date(2017, 4, 1) },
+  { name: 'Raven', start: new Date(2018, 4, 1) },
+  { name: 'Dragon', start: new Date(2019, 4, 1) },
+]
+
+const standardSets = () => {
+  const standardYearNames =
+    hsSeasons.filter(season => addYears(season.start, 2) >= new Date() )
+             .map(season => season.name)
+  return [
+    'CORE', 'EXPERT1',
+    ...expansions.filter(
+      exp => exp.yearName && standardYearNames.includes(exp.yearName)
+    ).map(exp => exp.value)
+  ]
+}
+
+export { klasses, expansions, types, rarities, standardSets }
