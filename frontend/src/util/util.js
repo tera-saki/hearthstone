@@ -55,7 +55,7 @@ const mechanicsList = [
   { value: 'deathrattle', text: '断末魔' },
   { value: 'divine_shield', text: '聖なる盾' },
   { value: 'echo', text: '木霊' },
-  { vaule: 'inspire', text: '激励' },
+  { value: 'inspire', text: '激励' },
   { value: 'lifesteal', text: '生命奪取' },
   { value: 'overkill', text: '血祭' },
   { value: 'overload', text: 'オーバーロード' },
@@ -71,7 +71,7 @@ const races = [
   { value: 'demon', text: '悪魔' },
   { value: 'dragon', text: 'ドラゴン' },
   { value: 'elemental', text: 'エレメンタル' },
-  { vaule: 'mechanical', text: 'メカ' },
+  { value: 'mechanical', text: 'メカ' },
   { value: 'murloc', text: 'マーロック' },
   { value: 'pirate', text: '海賊' },
   { value: 'totem', text: 'トーテム' }
