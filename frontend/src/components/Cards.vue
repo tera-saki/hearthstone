@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import { getCards } from '@/api/api'
 import { klasses, expansions, types, rarities, standardSets } from '@/util/util'
 export default {
@@ -138,7 +139,6 @@ export default {
   },
   methods: {
     async getData () {
-      //this._.debounce(() => {
       let query = ''
       const { params } = this
       if (params.cardClass) {
@@ -201,9 +201,9 @@ export default {
   },
   watch: {
     params: {
-      async handler() {
+      handler: _.debounce(async function(){
         await this.getData()
-      },
+      }, 500),
       deep: true
     }
   },
@@ -212,10 +212,10 @@ export default {
       return Math.ceil(this.total / this.params.blockNum)
     },
     pages () {
-      let start = this._.max([this.params.page - 2, 1])
-      let end = this._.min([start + 5, this.lastPage + 1])
-      start = this._.max([end - 5, 1])
-      return this._.range(start, end)
+      let start = _.max([this.params.page - 2, 1])
+      let end = _.min([start + 5, this.lastPage + 1])
+      start = _.max([end - 5, 1])
+      return _.range(start, end)
     }
   }
 }
