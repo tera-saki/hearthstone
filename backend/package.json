@@ -4,10 +4,15 @@
   "main": "index.js",
   "author": "tera-saki",
   "license": "MIT",
+  "scripts": {
+    "serve-start": "forever start -o out.log -e err.log src/app.js",
+    "serve-stop": "forever stop src/app.js"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "forever": "^0.15.3",
     "mysql2": "^1.6.5",
     "sequelize": "^5.1.0"
   },
