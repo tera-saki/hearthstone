@@ -52,26 +52,18 @@ function procConditions(query) {
   if (expansion) {
     where.expansion = { [Op.or]: expansion.split(',') }
   }
-  if (text) {
-    where.text = { [Op.substring]: text }
-  }
   if (type) {
     where.type = { [Op.or]: type.split(',') }
   }
-  const excludeSkin = {
-    [Op.or]: [
-      {
-        cost: {
-          [Op.not]: 0,
-        },
-      }, {
-        type: {
-          [Op.not]: 'hero',
-        },
-      },
-    ],
+  if (text) {
+    const NameOrText = {
+      [Op.or]: [
+        { name: { [Op.substring]: text } },
+        { text: { [Op.substring]: text } },
+      ],
+    }
+    where = { ...where, ...NameOrText }
   }
-  where = { ...where, ...excludeSkin }
   return { where }
 }
 
