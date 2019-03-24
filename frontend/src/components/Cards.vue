@@ -97,19 +97,19 @@
     <div class="container">
       <div class="row">
         <ul class="pagination ml-auto">
-          <li class="page-item" :class="{ disabled: params.page === 1 }">
+          <li class="page-item" :class="{ disabled: pagination.page === 1 }">
             <a class="page-link" href="#" @click="movePage(1)">&laquo;</a>
           </li>
-          <li class="page-item" :class="{ diabled: params.page === 1 }">
-            <a class="page-link" href="#" @click="movePage(params.page - 1)">&lt;</a>
+          <li class="page-item" :class="{ diabled: pagination.page === 1 }">
+            <a class="page-link" href="#" @click="movePage(pagination.page - 1)">&lt;</a>
           </li>
-          <li v-for="p in pages" :key="p" :class="['page-item', p === params.page ? 'active': '']">
+          <li v-for="p in pages" :key="p" :class="['page-item', p === pagination.page ? 'active': '']">
             <a class="page-link" href="#" @click="movePage(p)">{{ p }}</a>
           </li>
-          <li class="page-item" :class="{ disabled: params.page === lastPage }">
-            <a class="page-link" href="#" @click="movePage(params.page + 1)">&gt;</a>
+          <li class="page-item" :class="{ disabled: pagination.page === lastPage }">
+            <a class="page-link" href="#" @click="movePage(pagination.page + 1)">&gt;</a>
           </li>
-          <li class="page-item" :class="{ diabled: params.page === lastPage }">
+          <li class="page-item" :class="{ diabled: pagination.page === lastPage }">
             <a class="page-link" href="#" @click="movePage(lastPage)">&raquo;</a>
           </li>
         </ul>
@@ -148,6 +148,8 @@ export default {
       race: '',
       cost: [],
       text: '',
+    },
+    pagination: {
       page: 1,
       blockNum: 20,
     },
@@ -164,7 +166,7 @@ export default {
   methods: {
     async getData () {
       let query = ''
-      const { params } = this
+      const { params, pagination } = this
       if (params.cardClass) {
         query += `&cardClass=${params.cardClass}`
       }
@@ -193,11 +195,11 @@ export default {
       if (params.text) {
         query += `&text=${params.text}`
       }
-      if (params.page) {
-        query += `&page=${params.page}`
+      if (pagination.page) {
+        query += `&page=${pagination.page}`
       }
-      if (params.blockNum) {
-        query += `&blockNum=${params.blockNum}`
+      if (pagination.blockNum) {
+        query += `&blockNum=${pagination.blockNum}`
       }
 
       const { data } = await getCards(query)
@@ -213,14 +215,14 @@ export default {
       this.params.race = ''
       this.params.cost = []
       this.params.text = ''
-      this.params.page = 1
+      this.pagination.page = 1
     },
     imgURL (id) {
       const baseURL = 'https://art.hearthstonejson.com/v1/render/latest/enUS/256x/'
       return baseURL + `${id}.png`
     },
     movePage (page) {
-      this.params.page = page
+      this.pagination.page = page
     },
     changeCost (c) {
       const { cost } = this.params
@@ -229,10 +231,22 @@ export default {
       } else {
         this.params.cost.push(c)
       }
-    }
+    },
+
   },
   watch: {
     params: {
+      handler: _.debounce(async function(){
+        // TODO: more smart
+        if (this.pagination.page === 1) {
+          await this.getData()
+        } else {
+          this.pagination.page = 1
+        }
+      }, 500),
+      deep: true
+    },
+    pagination: {
       handler: _.debounce(async function(){
         await this.getData()
       }, 500),
@@ -241,10 +255,10 @@ export default {
   },
   computed: {
     lastPage () {
-      return Math.ceil(this.total / this.params.blockNum)
+      return Math.ceil(this.total / this.pagination.blockNum)
     },
     pages () {
-      let start = _.max([this.params.page - 2, 1])
+      let start = _.max([this.pagination.page - 2, 1])
       let end = _.min([start + 5, this.lastPage + 1])
       start = _.max([end - 5, 1])
       return _.range(start, end)

@@ -16,7 +16,6 @@ cardsRouter.get('/', async (req, res, next) => {
 
 function procConditions(query) {
   const { artist, attack, cardClass, cost, health, mechanics, race, name, rarity, expansion, text, type } = query
-  console.log(race);
   let where = {}
   if (artist) {
     where.artist = { [Op.substring]: name }
