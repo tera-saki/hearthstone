@@ -48,6 +48,35 @@ const rarities = [
   { value: 'free', text: 'なし' }
 ]
 
+const mechanicsList = [
+  { value: 'battlecry', text: '雄叫び' },
+  { value: 'charge', text: '突撃' },
+  { value: 'combo', text: 'コンボ' },
+  { value: 'deathrattle', text: '断末魔' },
+  { value: 'divine_shield', text: '聖なる盾' },
+  { value: 'echo', text: '木霊' },
+  { vaule: 'inspire', text: '激励' },
+  { value: 'lifesteal', text: '生命奪取' },
+  { value: 'overkill', text: '血祭' },
+  { value: 'overload', text: 'オーバーロード' },
+  { value: 'poisonous', text: '猛毒' },
+  { value: 'rush', text: '急襲' },
+  { value: 'stealth', text: '潜伏' },
+  { value: 'taunt', text: '挑発' },
+  { value: 'windfury', text: '疾風' }
+]
+
+const races = [
+  { value: 'beast', text: '獣' },
+  { value: 'demon', text: '悪魔' },
+  { value: 'dragon', text: 'ドラゴン' },
+  { value: 'elemental', text: 'エレメンタル' },
+  { vaule: 'mechanical', text: 'メカ' },
+  { value: 'murloc', text: 'マーロック' },
+  { value: 'pirate', text: '海賊' },
+  { value: 'totem', text: 'トーテム' }
+]
+
 const hsSeasons = [
   { name: 'Kraken', start: new Date('2016-04-01') },
   { name: 'Mammoth', start: new Date('2017-04-01')  },
@@ -67,4 +96,4 @@ const standardSets = () => {
   ]
 }
 
-export { klasses, expansions, types, rarities, standardSets }
+export { klasses, expansions, types, rarities, mechanicsList, races, standardSets }

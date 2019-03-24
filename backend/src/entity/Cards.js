@@ -29,7 +29,7 @@ const Card = sequelize.define('card', {
   mechanics: {
     type: Sequelize.STRING,
     set(val) {
-      this.setDataValue('mechanics', val ? val.toString() : null)
+      this.setDataValue('mechanics', val ? val.toString().toLowerCase() : null)
     },
   },
   name: Sequelize.STRING,

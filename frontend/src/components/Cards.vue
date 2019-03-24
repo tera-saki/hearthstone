@@ -63,6 +63,26 @@
           {{ c }}
         </button>
       </div>
+
+      <div class="form-group mx-2" id="mechanics">
+        <label class="mx-1" for="mechanics">効果</label>
+        <select class="form-control-sm" id="mechanics" v-model="params.mechanics">
+          <option v-for="mechanics in [{ value: '', text: '全て' }, ...mechanicsList]"
+                  :key="mechanics.text" :value="mechanics.value">
+            {{ mechanics.text }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group mx-2" id="race">
+        <label class="mx-1" for="race">種族</label>
+        <select class="form-control-sm" id="race" v-model="params.race">
+          <option v-for="race in [{ value: '', text: '全て' }, ...races]"
+                  :key="race.text" :value="race.value">
+            {{ race.text }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div class="form-row">
@@ -113,7 +133,7 @@
 <script>
 import _ from 'lodash';
 import { getCards } from '@/api/api'
-import { klasses, expansions, types, rarities, standardSets } from '@/util/util'
+import { klasses, expansions, types, rarities, mechanicsList, races, standardSets } from '@/util/util'
 export default {
   name: 'Cards',
   data: () => ({
@@ -124,6 +144,8 @@ export default {
       expansion: '',
       type: '',
       rarity: '',
+      mechanics: '',
+      race: '',
       cost: [],
       text: '',
       page: 1,
@@ -133,6 +155,8 @@ export default {
     expansions,
     types,
     rarities,
+    mechanicsList,
+    races,
   }),
   async created () {
     await this.getData()
@@ -160,6 +184,12 @@ export default {
       if (params.cost.length > 0) {
         query += `&cost=${encodeURIComponent(params.cost.join(','))}`
       }
+      if (params.mechanics) {
+        query += `&mechanics=${params.mechanics}`
+      }
+      if (params.race) {
+        query += `&race=${params.race}`
+      }
       if (params.text) {
         query += `&text=${params.text}`
       }
@@ -179,6 +209,8 @@ export default {
       this.params.expansion = ''
       this.params.type = ''
       this.params.rarity = ''
+      this.params.mechanics = ''
+      this.params.race = ''
       this.params.cost = []
       this.params.text = ''
       this.params.page = 1
