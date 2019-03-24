@@ -27,7 +27,15 @@ function procConditions(query) {
     where.cardClass = cardClass
   }
   if (cost) {
-    where.cost = OpWithNum(cost)
+    const costs = cost.split(',').map((c) => {
+      const threshold = /(\d+)(\+|-)/.exec(c)
+      if (threshold) {
+        const [, num, op] = threshold
+        return { [op === '+' ? Op.gte : Op.lte]: parseInt(num, 10) }
+      }
+      return { [Op.eq]: parseInt(c, 10) }
+    })
+    where.cost = { [Op.or]: costs }
   }
   if (health) {
     where.health = OpWithNum(health)

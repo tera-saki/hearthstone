@@ -45,7 +45,18 @@
           </option>
         </select>
       </div>
+    </div>
 
+    <div class="form-row">
+      <div class="form-group mx-2">
+        <label class="mx-1" for="cost">コスト</label>
+        <button v-for="c in ['0', '1', '2', '3', '4', '5', '6', '7', '8+']"
+                type="button" :key="c"
+                :class="['btn', cost.includes(c) ? 'btn-primary': 'btn-light', 'cost-button']"
+                @click="changeCost(c)">
+          {{ c }}
+        </button>
+      </div>
     </div>
 
   </form>
@@ -96,6 +107,7 @@ export default {
     expansion: '',
     type: '',
     rarity: '',
+    cost: [],
     page: 1,
     blockNum: 20,
     klasses,
@@ -110,6 +122,13 @@ export default {
     },
     movePage (page) {
       this.page = page
+    },
+    changeCost(c) {
+      if (this.cost.includes(c)) {
+        this.cost = this.cost.filter(cost => cost !== c)
+      } else {
+        this.cost.push(c)
+      }
     }
   },
   asyncComputed: {
@@ -130,6 +149,9 @@ export default {
       }
       if (this.rarity) {
         query += `&rarity=${this.rarity}`
+      }
+      if (this.cost.length > 0) {
+        query += `&cost=${encodeURIComponent(this.cost.join(','))}`
       }
       if (this.page) {
         query += `&page=${this.page}`
@@ -159,5 +181,10 @@ export default {
     margin: 20px 40px;
     padding: 10px;
     border: thin solid gray;
+  }
+  .cost-button {
+    border: thin solid gray;
+    margin: 2px;
+    border-radius: 50%
   }
 </style>
