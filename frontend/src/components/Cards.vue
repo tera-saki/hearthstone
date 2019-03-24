@@ -72,7 +72,13 @@
       </div>
       <div class="row">
         <div v-for="card in dataBlock.cards" :key="card.id" class="col-xs-3">
-          <img :src="imgURL(card.id)">
+          <img :src="imgURL(card.id)"
+                v-tooltip="{
+                  content: card.flavor,
+                  placement: 'top',
+                  class: 'tooltip-custom',
+                }"
+           />
         </div>
       </div>
     </div>

@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style>
-
+.vue-tooltip.tooltip-custom {
+  font-style: italic;
+}
 </style>

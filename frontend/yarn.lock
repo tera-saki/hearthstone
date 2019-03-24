@@ -5731,6 +5731,11 @@ pluralize@^7.0.0:
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
   integrity sha512-ARhBOdzS3e41FbkW/XWrTEtukqqLoK5+Z/4UeDaLuSW+39JPeFgs4gCGqsrJHVZX0fUrx//4OF0K1CUGwlIFow==
 
+popper.js@1.12.5:
+  version "1.12.5"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.5.tgz#229e4dea01629e1f1a1e26991ffade5024220fa6"
+  integrity sha512-6R2eXIy1xYukMNutoD+y/Gj0IpjEQhivyZonm5Vz0Fp8jdc7kvheKCvpM/t+PxqKb7VbLVnvPVEdTyslEb7f6w==
+
 popper.js@^1.14.7:
   version "1.14.7"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.7.tgz#e31ec06cfac6a97a53280c3e55e4e0c860e7738e"
@@ -7660,6 +7665,13 @@ vue-async-computed@^3.6.1:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/vue-async-computed/-/vue-async-computed-3.6.1.tgz#6b790e2125347c678d1b82b10a5b03b41d7b86d0"
   integrity sha512-8FFDTqfdvKrzK5Fr7nNHZgP6sQ2hTUELTrLn25i8VW/g06MztD+FOe1gs0RYVpRkPlcrykf2hbJxNYra1c4OGg==
+
+vue-directive-tooltip@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/vue-directive-tooltip/-/vue-directive-tooltip-1.5.1.tgz#bbec1f856ba4af84e6e44db4355b59cc9f3a4b4f"
+  integrity sha512-2v16flWOSM2gp/pNLje29lJXmWq4ib0NjoAn4wY5R1pYzy0S9a/q3dhQ7dgoqQ1ePXYOj3EpZxMVO8AQ1Zod/A==
+  dependencies:
+    popper.js "1.12.5"
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
