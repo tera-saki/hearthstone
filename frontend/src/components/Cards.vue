@@ -96,7 +96,7 @@
   <div class="card-lists">
     <div class="container">
       <div class="row">
-        <ul class="pagination mx-1">
+        <ul class="pagination ml-auto">
           <li class="page-item" :class="{ disabled: params.page === 1 }">
             <a class="page-link" href="#" @click="movePage(1)">&laquo;</a>
           </li>
