@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3000'
+const baseURL = 'http://localhost:7000'
 
 async function getCards(query = '') {
   const url = `${baseURL}/cards?${query}`
