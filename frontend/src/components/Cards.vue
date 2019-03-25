@@ -100,7 +100,7 @@
           <li class="page-item" :class="{ disabled: pagination.page === 1 }">
             <a class="page-link" href="#" @click="movePage(1)">&laquo;</a>
           </li>
-          <li class="page-item" :class="{ diabled: pagination.page === 1 }">
+          <li class="page-item" :class="{ disabled: pagination.page === 1 }">
             <a class="page-link" href="#" @click="movePage(pagination.page - 1)">&lt;</a>
           </li>
           <li v-for="p in pages" :key="p" :class="['page-item', p === pagination.page ? 'active': '']">
@@ -109,7 +109,7 @@
           <li class="page-item" :class="{ disabled: pagination.page === lastPage }">
             <a class="page-link" href="#" @click="movePage(pagination.page + 1)">&gt;</a>
           </li>
-          <li class="page-item" :class="{ diabled: pagination.page === lastPage }">
+          <li class="page-item" :class="{ disabled: pagination.page === lastPage }">
             <a class="page-link" href="#" @click="movePage(lastPage)">&raquo;</a>
           </li>
         </ul>
