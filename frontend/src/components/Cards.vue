@@ -88,7 +88,7 @@
     <div class="form-row">
       <div class="form-group mx-2">
         <label class="mx-1" for="text">文字列検索</label>
-        <input type="text" class="form-control-sm" name="text" v-model="params.text" debounce="2000"/>
+        <input type="text" class="form-control-sm" name="text" v-model="params.text" />
       </div>
     </div>
 
