@@ -14,7 +14,8 @@ const klasses = [
 ]
 
 const expansions = [
-  { value: 'TROLL', text: '天下一ヴドゥ祭', yearName: 'Raven'},
+  { value: 'DALARAN', text: '爆誕！悪党同盟', yearName: 'Dragon' },
+  { value: 'TROLL', text: '天下一ヴドゥ祭', yearName: 'Raven' },
   { value: 'BOOMSDAY', text: '博士のメカメカ大作戦', yearName: 'Raven' },
   { value: 'GILNEAS', text: '妖の森ウィッチウッド', yearName: 'Raven' },
   { value: 'LOOTAPALOOZA', text: 'コボルトと秘宝の迷宮', yearName: 'Mammoth' },
@@ -63,6 +64,7 @@ const mechanicsList = [
   { value: 'rush', text: '急襲' },
   { value: 'stealth', text: '潜伏' },
   { value: 'taunt', text: '挑発' },
+  { value: 'twinspell', text: '双呪文' },
   { value: 'windfury', text: '疾風' }
 ]
 
