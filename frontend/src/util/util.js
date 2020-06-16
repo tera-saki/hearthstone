@@ -10,10 +10,15 @@ const klasses = [
   { value: 'shaman', text: 'シャーマン' },
   { value: 'warlock', text: 'ウォーロック' },
   { value: 'warrior', text: 'ウォーリアー' },
+  { value: 'demonhunter', text: 'デーモンハンター' },
   { value: 'neutral', text: '中立' }
 ]
 
 const expansions = [
+  { value: 'BLACK_TEMPLE', text: '灰に舞う降魔の狩人', yearName: 'Phoenix' },
+  { value: 'YEAR_OF_THE_DRAGON', text: 'ガラクロンドの目覚め', yearName: 'Dragon' },
+  { value: 'DRAGONS', text: '激闘！ドラゴン大決戦', yearName: 'Dragon' },
+  { value: 'ULDUM', text: '突撃！探検同盟', yearName: 'Dragon' },
   { value: 'DALARAN', text: '爆誕！悪党同盟', yearName: 'Dragon' },
   { value: 'TROLL', text: '天下一ヴドゥ祭', yearName: 'Raven' },
   { value: 'BOOMSDAY', text: '博士のメカメカ大作戦', yearName: 'Raven' },
@@ -58,10 +63,13 @@ const mechanicsList = [
   { value: 'echo', text: '木霊' },
   { value: 'inspire', text: '激励' },
   { value: 'lifesteal', text: '生命奪取' },
+  { value: 'outcast', text: '異端' },
   { value: 'overkill', text: '血祭' },
   { value: 'overload', text: 'オーバーロード' },
   { value: 'poisonous', text: '猛毒' },
+  { value: 'reborn', text: '蘇り' },
   { value: 'rush', text: '急襲' },
+  { value: 'sidequest', text: 'サイドクエスト' },
   { value: 'stealth', text: '潜伏' },
   { value: 'taunt', text: '挑発' },
   { value: 'twinspell', text: '双呪文' },
@@ -81,9 +89,10 @@ const races = [
 
 const hsSeasons = [
   { name: 'Kraken', start: new Date('2016-04-01') },
-  { name: 'Mammoth', start: new Date('2017-04-01')  },
-  { name: 'Raven', start: new Date('2018-04-01')  },
-  { name: 'Dragon', start: new Date('2019-04-01')  },
+  { name: 'Mammoth', start: new Date('2017-04-01') },
+  { name: 'Raven', start: new Date('2018-04-01') },
+  { name: 'Dragon', start: new Date('2019-04-01') },
+  { name: 'Phoenix', start: new Date('2020-04-01') }
 ]
 
 const standardSets = () => {
