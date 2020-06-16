@@ -1,5 +1,10 @@
 # frontend
 
+## Prerequisites
+
+- Node 
+  - version: 10.21.0
+
 ## Project setup
 ```
 yarn install
